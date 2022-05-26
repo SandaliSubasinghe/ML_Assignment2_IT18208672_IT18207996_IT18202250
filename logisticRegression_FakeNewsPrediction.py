@@ -94,3 +94,22 @@ new_Y = train_data['label'].values
 print(new_X)
 
 print(new_Y)
+
+"""## **Convert text into numarical data**"""
+
+# Import dependences to convert text into numarical form
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+tf_idf_vectorizer = TfidfVectorizer()
+tf_idf_vectorizer.fit(new_X)
+
+new_X = tf_idf_vectorizer.transform(new_X)
+
+print(new_X)
+
+"""## **Splitting dataset to training and test data**"""
+
+# Import dependencies to split train and test data
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, Y_train, Y_test = train_test_split(new_X, new_Y, test_size = 0.2, stratify=new_Y, random_state=4)
