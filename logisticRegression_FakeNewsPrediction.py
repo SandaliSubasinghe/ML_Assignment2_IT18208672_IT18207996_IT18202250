@@ -140,3 +140,35 @@ prediction_of_X_test = logistic_regression_model.predict(X_test)
 X_test_accuraccy = accuracy_score(prediction_of_X_test, Y_test)
 
 print('Accuracy score of logistic regression test data : ', X_test_accuraccy)
+
+"""## **Confusion Matrix**"""
+
+# Import required libraries
+import matplotlib.pyplot as plt
+from sklearn import metrics
+import itertools
+
+def plot_confusion_matrix(cm, classes, normalize=False, title='Confusion Matrix - Logistic Regression', cmap=plt.cm.Greens):
+  plt.imshow(cm, interpolation='nearest', cmap=cmap)
+  plt.title(title)
+  plt.colorbar()
+  tick_marks = np.arange(len(classes))
+  plt.xticks(tick_marks, classes, rotation=45)
+  plt.yticks(tick_marks, classes)
+
+  if normalize:
+    confusion_matrix = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+    print("Normalized confusion matrix")
+  else:
+      print('Confusion matrix, without normalization')
+  thresh = cm.max() / 2.
+  for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+      plt.text(j, i, cm[i, j],horizontalalignment="center",color="white" if cm[i, j] > thresh else "black")
+
+  plt.tight_layout()
+  plt.ylabel('True label')
+  plt.xlabel('Predicted label')
+
+confusion_matrix_logistic = metrics.confusion_matrix(prediction_of_X_test, Y_test)
+plot_confusion_matrix(confusion_matrix_logistic, classes=['FAKE NEWS', 'REAL NEWS'])
+
