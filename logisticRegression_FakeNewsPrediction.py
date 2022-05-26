@@ -113,3 +113,30 @@ print(new_X)
 from sklearn.model_selection import train_test_split
 
 X_train, X_test, Y_train, Y_test = train_test_split(new_X, new_Y, test_size = 0.2, stratify=new_Y, random_state=4)
+
+"""# **Training the model**"""
+
+# Import dependencies of logistic regression
+from sklearn.linear_model import LogisticRegression
+
+logistic_regression_model = LogisticRegression()
+
+#Train the model
+logistic_regression_model.fit(X_train, Y_train)
+
+"""## **Check the Accuracy**"""
+
+# Import the dependency required to check the accuracy
+from sklearn.metrics import accuracy_score
+
+# Check the accurscy score of train data
+prediction_of_X_train = logistic_regression_model.predict(X_train)
+X_train_accuraccy = accuracy_score(prediction_of_X_train, Y_train)
+
+print('Accuracy score of logistic regression train data : ', X_train_accuraccy)
+
+# Check the accurscy score of test data
+prediction_of_X_test = logistic_regression_model.predict(X_test)
+X_test_accuraccy = accuracy_score(prediction_of_X_test, Y_test)
+
+print('Accuracy score of logistic regression test data : ', X_test_accuraccy)
