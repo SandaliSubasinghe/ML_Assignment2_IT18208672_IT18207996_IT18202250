@@ -63,3 +63,34 @@ print(X)
 Y = train_data['label']
 
 print(Y)
+
+"""## **Stemming**"""
+
+# Import dependences for stemming
+from nltk.stem.porter import PorterStemmer
+
+import re
+
+porter_stemmer = PorterStemmer()
+
+def stemmimg(data):
+  remove_unnecessary_charactors = re.sub('[^a-zA-Z]', ' ', data)
+  to_lowercase = remove_unnecessary_charactors.lower()
+  splitting = to_lowercase.split()
+  stemming_data = [porter_stemmer.stem(word) for word in splitting if not word in stopwords.words('english')]
+  final_data = ' '.join(stemming_data)
+
+  return final_data
+
+train_data['merged_title_and_author'] = train_data['merged_title_and_author'].apply(stemmimg)
+
+print(train_data['merged_title_and_author'])
+
+"""## **Seperating the indipendent and dependent variables after stemming**"""
+
+new_X = train_data['merged_title_and_author'].values
+new_Y = train_data['label'].values
+
+print(new_X)
+
+print(new_Y)
