@@ -172,3 +172,18 @@ def plot_confusion_matrix(cm, classes, normalize=False, title='Confusion Matrix 
 confusion_matrix_logistic = metrics.confusion_matrix(prediction_of_X_test, Y_test)
 plot_confusion_matrix(confusion_matrix_logistic, classes=['FAKE NEWS', 'REAL NEWS'])
 
+"""## **Test Prediction**"""
+
+X_value = X_test[5]
+
+prediction = logistic_regression_model.predict(X_value)
+print(prediction)
+
+if(prediction[0]==0):
+  print('The news is a real news')
+
+else:
+  print('The news is a fake news')
+
+# Check the label
+print(Y_test[5])
